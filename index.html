@@ -697,38 +697,139 @@
 
 
     
-    .nav-dropdown{position:relative}
-    .nav-dropdown>a{display:flex;align-items:center;gap:3px;cursor:pointer}
-    .nav-dropdown>a::after{content:'';display:inline-block;width:6px;height:6px;
-      border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
-      transform:rotate(45deg) translateY(-2px);transition:transform .2s;margin-left:2px}
-    .nav-dropdown:hover>a::after,.nav-dropdown:focus-within>a::after{transform:rotate(-135deg) translateY(1px)}
-    .dropdown-menu{display:none;position:absolute;top:calc(100% + 10px);left:50%;
-      transform:translateX(-50%);background:rgba(255,255,255,.97);
-      backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-      border:1px solid rgba(11,42,54,.10);border-radius:12px;
-      box-shadow:0 8px 32px rgba(11,42,54,.14);min-width:190px;padding:6px;z-index:2000}
-    .nav-dropdown:hover .dropdown-menu,.nav-dropdown:focus-within .dropdown-menu{display:block}
-    .dropdown-menu a{display:block;padding:9px 14px;font-size:.83rem;font-weight:500;
-      color:var(--text-body);border-radius:8px;transition:background .15s,color .15s;white-space:nowrap}
-    .dropdown-menu a:hover{background:var(--green-light);color:var(--navy)}
+    .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
 
-    
-    
-    .nav-dropdown{position:relative;display:inline-flex;align-items:center}
-    .nav-dropdown>a,.nav-dropdown>button.nav-dd-btn{display:inline-flex;align-items:center;gap:3px;cursor:pointer;font-size:.86rem;font-weight:500;color:var(--text-body);padding:7px 14px;border-radius:8px;transition:.2s;background:none;border:none;font-family:var(--font-b)}
-    .nav-dropdown>a:hover,.nav-dropdown>a.active,.nav-dropdown>button.nav-dd-btn:hover{background:var(--green-light);color:var(--navy)}
-    .nav-dropdown>a::after,.nav-dropdown>button.nav-dd-btn::after{content:'';display:inline-block;width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-1px);transition:transform .2s;margin-left:2px}
-    .nav-dropdown:hover>a::after,.nav-dropdown:focus-within>a::after,.nav-dropdown:hover>button.nav-dd-btn::after,.nav-dropdown:focus-within>button.nav-dd-btn::after{transform:rotate(-135deg) translateY(1px)}
-    .dd-menu{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:rgba(255,255,255,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(11,42,54,.10);border-radius:12px;box-shadow:0 8px 32px rgba(11,42,54,.14);min-width:200px;padding:6px;z-index:2000}
-    .nav-dropdown:hover .dd-menu,.nav-dropdown:focus-within .dd-menu{display:block}
-    .dd-menu a{display:flex;align-items:center;gap:9px;padding:9px 14px;font-size:.82rem;font-weight:500;color:var(--text-body);border-radius:8px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none}
-    .dd-menu a:hover{background:var(--green-light);color:var(--navy)}
-    .dd-menu .dd-divider{height:1px;background:rgba(11,42,54,.08);margin:4px 8px}
-    .dd-icon{width:15px;height:15px;flex-shrink:0;opacity:.6}
-    .nav-dropdown.trial-dd>button.nav-dd-btn{font-size:.84rem;font-weight:700;padding:9px 20px;border-radius:10px;color:white;background:linear-gradient(135deg,var(--green),#85D455);box-shadow:0 4px 14px rgba(109,197,64,.30)}
-    .nav-dropdown.trial-dd>button.nav-dd-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(109,197,64,.40);background:linear-gradient(135deg,#56A030,var(--green));color:white}
-    .nav-dropdown.trial-dd>button.nav-dd-btn::after{border-color:white}
+.nav-dropdown > a,
+.nav-dropdown > button.nav-dd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 500;
+  color: var(--text-body);
+  padding: 7px 14px;
+  border-radius: 8px;
+  transition: .2s;
+  background: none;
+  border: none;
+  font-family: var(--font-b);
+}
+
+.nav-dropdown > a:hover,
+.nav-dropdown > a.active,
+.nav-dropdown > button.nav-dd-btn:hover,
+.nav-dropdown.open > a,
+.nav-dropdown.open > button.nav-dd-btn {
+  background: var(--green-light);
+  color: var(--navy);
+}
+
+.nav-dropdown > a::after,
+.nav-dropdown > button.nav-dd-btn::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform .2s;
+  margin-left: 2px;
+}
+
+.nav-dropdown.open > a::after,
+.nav-dropdown.open > button.nav-dd-btn::after {
+  transform: rotate(-135deg) translateY(1px);
+}
+
+.dd-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(11,42,54,.10);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(11,42,54,.14);
+  min-width: 220px;
+  padding: 6px;
+  z-index: 2000;
+}
+
+.nav-dropdown.open .dd-menu { display: block; }
+
+.dd-menu a,
+.dd-menu .dd-disabled {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--text-body);
+  border-radius: 8px;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.dd-menu a:hover {
+  background: var(--green-light);
+  color: var(--navy);
+}
+
+.dd-menu .dd-divider {
+  height: 1px;
+  background: rgba(11,42,54,.08);
+  margin: 4px 8px;
+}
+
+.dd-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  opacity: .6;
+}
+
+.nav-dropdown.trial-dd > button.nav-dd-btn {
+  font-size: .84rem;
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: 10px;
+  color: white;
+  background: linear-gradient(135deg,var(--green),#85D455);
+  box-shadow: 0 4px 14px rgba(109,197,64,.30);
+}
+
+.nav-dropdown.trial-dd > button.nav-dd-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(109,197,64,.40);
+  background: linear-gradient(135deg,#56A030,var(--green));
+  color: white;
+}
+
+.nav-dropdown.trial-dd > button.nav-dd-btn::after { border-color: white; }
+
+.dd-disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  pointer-events: none;
+  justify-content: space-between;
+}
+
+.dd-disabled small {
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  background: var(--green-light);
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-left: auto;
+}
 
   
     /* ── Stats Break ── */
@@ -775,25 +876,122 @@
 
 <!-- ====== NAVBAR ====== -->
 <header>
+<header>
   <nav class="navbar" role="navigation" aria-label="Main Navigation" id="mainNavbar">
     <a href="index.html" class="nav-logo" aria-label="iRecord Home">
       <img src="images/Favicon.png" alt="iRecord Icon" class="fav-icon">
       <img src="images/iRecord Transperant logo.png" alt="iRecord" class="logo-text">
     </a>
+
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
-      <span class="nav-dropdown"><a href="features-v2.html">Features</a><div class="dd-menu"><a href="features-v2.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg>All Features</a><a href="manual.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M3 2h8l2 2v11H3V2z" stroke="currentColor" stroke-width="1.3"/><path d="M6 6h4M6 9h4M6 12h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>User Manual</a></div></span>
-      <span class="nav-dropdown"><a href="import-templates.html">Import</a><div class="dd-menu"><a href="import-templates.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2 14h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Import Templates</a><a href="broker-formats.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2z" stroke="currentColor" stroke-width="1.3"/><path d="M5 4V2h6v2M8 7v3M6 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Broker Formats</a><div class="dd-divider"></div><a href="system-configuration.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.5 1.5M11.5 11.5L13 13M3 13l1.5-1.5M11.5 4.5L13 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Configurations</a></div></span>
-      <span class="nav-dropdown"><a href="about.html">About</a><div class="dd-menu"><a href="about.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>About Us</a><a href="careers.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5V4a3 3 0 016 0v1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Careers</a></div></span>
-      <span class="nav-dropdown"><a href="contact.html">Contact</a><div class="dd-menu"><a href="contact.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v5M8 5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>iRecord Helpdesk</a><div class="dd-divider"></div><a href="mailto:support@irecordinfo.com"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 4l7 5 7-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>support@irecordinfo.com</a><a href="tel:+919320667366"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M14 11.4l-2.1-2.1a1 1 0 00-1.4 0l-1 1A9.5 9.5 0 014.7 5.5l1-1a1 1 0 000-1.4L3.6 1C3.2.6 2.5.9 2.2 1.3L1.4 2C.9 2.5.7 3.2.8 3.8a14.4 14.4 0 0010.6 10.8c.6.1 1.3-.1 1.8-.6l.7-.8c.4-.5.5-1.4.1-1.8z" stroke="currentColor" stroke-width="1.2"/></svg>+91 93206 67366</a><div class="dd-divider"></div><a href="https://irecord.freshdesk.com/support/home" target="_blank" rel="noopener"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 6a2 2 0 114 0c0 1.5-2 1.5-2 3M8 12h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Help Centre</a></div></span>
-      <span class="nav-dropdown"><a href="download.html">Download</a><div class="dd-menu"><a href="download.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M1 14h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Download Software</a><a href="download.html#remote"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 15h6M8 12v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Remote Support</a></div></span>
+
+      <span class="nav-dropdown">
+        <a href="features-v2.html">Features</a>
+        <div class="dd-menu">
+          <a href="features-v2.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+            All Features
+          </a>
+          <a href="manual.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M3 2h8l2 2v11H3V2z" stroke="currentColor" stroke-width="1.3"/><path d="M6 6h4M6 9h4M6 12h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            User Manual
+          </a>
+        </div>
+      </span>
+
+      <span class="nav-dropdown">
+        <a href="import-templates.html">Import</a>
+        <div class="dd-menu">
+          <a href="import-templates.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2 14h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Import Templates
+          </a>
+          <a href="broker-formats.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2z" stroke="currentColor" stroke-width="1.3"/><path d="M5 4V2h6v2M8 7v3M6 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Broker Formats
+          </a>
+          <div class="dd-divider"></div>
+          <a href="system-configuration.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.5 1.5M11.5 11.5L13 13M3 13l1.5-1.5M11.5 4.5L13 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Configurations
+          </a>
+        </div>
+      </span>
+
+      <a href="pay-online.html">Pricing</a>
+
+      <span class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="dd-menu">
+          <a href="about.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            About Us
+          </a>
+          <a href="careers.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5V4a3 3 0 016 0v1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Careers
+          </a>
+        </div>
+      </span>
+
+      <span class="nav-dropdown">
+        <a href="contact.html">Contact</a>
+        <div class="dd-menu">
+          <a href="contact.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v5M8 5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            iRecord Helpdesk
+          </a>
+          <div class="dd-divider"></div>
+          <a href="mailto:support@irecordinfo.com">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 4l7 5 7-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            support@irecordinfo.com
+          </a>
+          <a href="tel:+919320667366">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M14 11.4l-2.1-2.1a1 1 0 00-1.4 0l-1 1A9.5 9.5 0 014.7 5.5l1-1a1 1 0 000-1.4L3.6 1C3.2.6 2.5.9 2.2 1.3L1.4 2C.9 2.5.7 3.2.8 3.8a14.4 14.4 0 0010.6 10.8c.6.1 1.3-.1 1.8-.6l.7-.8c.4-.5.5-1.4.1-1.8z" stroke="currentColor" stroke-width="1.2"/></svg>
+            +91 93206 67366
+          </a>
+        </div>
+      </span>
+
+      <span class="nav-dropdown">
+        <a href="download.html">Download</a>
+        <div class="dd-menu">
+          <a href="download.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M1 14h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download Software
+          </a>
+          <a href="download.html#remote">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 15h6M8 12v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Remote Support
+          </a>
+        </div>
+      </span>
     </div>
+
     <div class="nav-cta">
-      <span class="nav-dropdown trial-dd"><button class="nav-dd-btn" type="button">Trial / Login</button><div class="dd-menu"><a href="download.html"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M1 14h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Download Free Trial</a><div class="dd-divider"></div><a href="https://www.irecordinfo.com/" target="_blank" rel="noopener"><svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M10 3l4 5-4 5M14 8H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 13H3a1 1 0 01-1-1V4a1 1 0 011-1h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Login to iRecord</a></div></span>
-      <button class="btn-primary" onclick="window.location.href='pay-online.html'">Buy Now</button>
+      <span class="nav-dropdown trial-dd">
+        <button class="nav-dd-btn" type="button">Trial / Login</button>
+        <div class="dd-menu">
+          <a href="download.html">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M1 14h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download Free Trial
+          </a>
+          <div class="dd-divider"></div>
+          <span class="dd-disabled" aria-disabled="true">
+            <svg class="dd-icon" viewBox="0 0 16 16" fill="none"><path d="M10 3l4 5-4 5M14 8H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 13H3a1 1 0 01-1-1V4a1 1 0 011-1h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Login to iRecord
+            <small>Coming Soon</small>
+          </span>
+        </div>
+      </span>
     </div>
-    <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0"><span></span><span></span><span></span></div>
+
+    <div class="hamburger" id="hamburgerBtn" aria-label="Open menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
   </nav>
+
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="active">Home</a>
     <a href="features-v2.html">Features</a>
@@ -801,6 +999,7 @@
     <a href="import-templates.html">Import Templates</a>
     <a href="broker-formats.html">Broker Formats</a>
     <a href="system-configuration.html">Configurations</a>
+    <a href="pay-online.html">Pricing</a>
     <a href="about.html">About</a>
     <a href="careers.html">Careers</a>
     <a href="contact.html">Contact</a>
@@ -1230,6 +1429,9 @@
       <p>India's most trusted Share Accounting &amp; Portfolio Management software. Built by financial experts for serious investors, traders, and financial advisors.</p>
       <div class="f-contact">
         <div><a href="mailto:info@irecordinfo.com">info@irecordinfo.com</a></div>
+      </div>
+    </div>
+
     <div class="f-col">
       <h4>Important Links</h4>
       <ul>
@@ -1238,9 +1440,10 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="careers.html">Careers</a></li>
         <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="pay-online.html">Pay Online</a></li>
+        <li><a href="pay-online.html">Pricing</a></li>
       </ul>
     </div>
+
     <div class="f-col">
       <h4>Quick Links</h4>
       <ul>
@@ -1253,15 +1456,7 @@
         <li><a href="https://irecord.freshdesk.com/support/home" target="_blank" rel="noopener">Help Centre</a></li>
       </ul>
     </div>
-    <div class="f-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="refunds-policy.html">Refunds Policy</a></li>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="disclaimer.html">Reports Disclaimer</a></li>
-        <li><a href="https://www.irecordinfo.com/terms-of-use.php" target="_blank" rel="noopener">Terms of Use</a></li>
-      </ul>
-    </div>
+
     <div class="f-col f-col-address">
       <h4>Contact Us</h4>
       <address>
@@ -1271,12 +1466,12 @@
       </address>
     </div>
   </div>
+
   <div class="f-bottom">
     <span>&#169; 2026 iRecord InfoTech Solutions Pvt. Ltd. All rights reserved.</span>
     <span>Made with &#10084; for Indian Investors</span>
   </div>
 </footer>
-
 <!-- ====== MODAL ====== -->
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
@@ -1292,17 +1487,79 @@
 </div>
 
 <script>
-  // Hamburger toggle
-  const ham = document.getElementById('ham');
-  const mob = document.getElementById('mob');
-  ham.addEventListener('click', () => mob.classList.toggle('open'));
-  ham.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') mob.classList.toggle('open'); });
-  // Close modal on overlay click
-  document.getElementById('modal').addEventListener('click', function(e) {
-    if(e.target===this) this.classList.remove('open');
+  const navbar = document.getElementById('mainNavbar');
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
   });
-  // Navbar shadow on scroll
-  
+
+  if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    hamburgerBtn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        mobileMenu.classList.toggle('open');
+      }
+    });
+  }
+
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  let activeDropdown = null;
+
+  dropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector('a, button');
+    const menu = dropdown.querySelector('.dd-menu');
+    let closeTimer;
+
+    const openMenu = () => {
+      clearTimeout(closeTimer);
+      if (activeDropdown && activeDropdown !== dropdown) {
+        activeDropdown.classList.remove('open');
+      }
+      dropdown.classList.add('open');
+      activeDropdown = dropdown;
+    };
+
+    const closeMenu = () => {
+      closeTimer = setTimeout(() => {
+        dropdown.classList.remove('open');
+        if (activeDropdown === dropdown) activeDropdown = null;
+      }, 220);
+    };
+
+    if (trigger && menu) {
+      trigger.addEventListener('click', e => {
+        if (trigger.tagName.toLowerCase() === 'button') {
+          e.preventDefault();
+        }
+        if (dropdown.classList.contains('open')) {
+          dropdown.classList.remove('open');
+          activeDropdown = null;
+        } else {
+          openMenu();
+        }
+      });
+
+      dropdown.addEventListener('mouseenter', openMenu);
+      dropdown.addEventListener('mouseleave', closeMenu);
+      dropdown.addEventListener('focusin', openMenu);
+      dropdown.addEventListener('focusout', closeMenu);
+    }
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.nav-dropdown')) {
+      dropdowns.forEach(d => d.classList.remove('open'));
+      activeDropdown = null;
+    }
+  });
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
 </script>
 
   <!-- Counter Animation -->
